@@ -1,8 +1,10 @@
-name := "myzio"
 
-version := "0.1"
 
-scalaVersion := "2.13.6"
+
+ThisBuild / version := "0.1.0-SNAPSHOT"
+ThisBuild / organization := "com.example"
+ThisBuild / scalaVersion := "2.13.7"
+ThisBuild / name := "myzio"
 
 //libraryDependencies += "dev.zio" %% "zio" % "2.0.0-M4"
 
@@ -17,3 +19,27 @@ libraryDependencies ++= Seq(
   "io.getquill" %% "quill-jdbc" % "3.10.0",
   "dev.zio" %% "zio-json" % "0.2.0-M2"
 )
+
+val AkkaVersion = "2.6.8"
+val AkkaHttpVersion = "10.2.7"
+libraryDependencies ++= Seq(
+  "com.typesafe.akka" %% "akka-actor-typed" % AkkaVersion,
+  "com.typesafe.akka" %% "akka-stream" % AkkaVersion,
+  "com.typesafe.akka" %% "akka-http" % AkkaHttpVersion
+)
+
+val circeVersion = "0.14.1"
+
+libraryDependencies ++= Seq(
+  "io.circe" %% "circe-core",
+  "io.circe" %% "circe-generic",
+  "io.circe" %% "circe-parser"
+).map(_ % circeVersion)
+
+assembly / mainClass := Some("myakka.akkahttp.AkkaHttpMain")
+
+//lazy val app = (project in file("."))
+//  .settings(
+//    assembly / mainClass := Some("myakka.akkahttp.AkkaHttpMain")
+//    // more settings here ...
+//  )

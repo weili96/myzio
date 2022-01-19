@@ -86,3 +86,81 @@ classDiagram
       }
 
 ```
+
+```plantuml
+@startjson
+#highlight "lastName"
+#highlight "address" / "city"
+#highlight "phoneNumbers" / "0" / "number"
+{
+"firstName": "John",
+"lastName": "Smith",
+"isAlive": true,
+"age": 28,
+"address": {
+"streetAddress": "21 2nd Street",
+"city": "New York",
+"state": "NY",
+"postalCode": "10021-3100"
+},
+"phoneNumbers": [
+{
+"type": "home",
+"number": "212 555-1234"
+},
+{
+"type": "office",
+"number": "646 555-4567"
+}
+],
+"children": [],
+"spouse": null
+}
+@endjson
+```
+
+```mermaid
+sequenceDiagram
+    participant Alice
+    participant John
+
+    rect rgb(191, 223, 255)
+    note right of Alice: Alice calls John.
+    Alice->>+John: Hello John, how are you?
+    rect rgb(200, 150, 255)
+    Alice->>+John: John, can you hear me?
+    John-->>-Alice: Hi Alice, I can hear you!
+    end
+    John-->>-Alice: I feel great!
+    end
+    Alice ->>+ John: Did you want to go to the game tonight?
+    John -->>- Alice: Yeah! See you there.
+
+```
+
+
+```plantuml
+@startuml
+scale 350 width
+[*] --> NotShooting
+
+state NotShooting {
+  [*] --> Idle
+  Idle --> Configuring : EvConfig
+  Configuring --> Idle : EvConfig
+}
+
+state Configuring {
+  [*] --> NewValueSelection
+  NewValueSelection --> NewValuePreview : EvNewValue
+  NewValuePreview --> NewValueSelection : EvNewValueRejected
+  NewValuePreview --> NewValueSelection : EvNewValueSaved
+
+  state NewValuePreview {
+     State1 -> State2
+  }
+
+}
+@enduml
+
+```
